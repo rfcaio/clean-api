@@ -1,6 +1,7 @@
 const express = require('express')
 
 const CreateProduct = require('./interactors/CreateProduct')
+const DeleteProductById = require('./interactors/DeleteProductById')
 const GetProductById = require('./interactors/GetProductById')
 const ListProducts = require('./interactors/ListProducts')
 
@@ -8,12 +9,23 @@ const MemoryProductGateway = require('./adapters/MemoryProductGateway')
 
 const memoryProductGateway = new MemoryProductGateway()
 const createProduct = new CreateProduct(memoryProductGateway)
+const deleteProductById = new DeleteProductById(memoryProductGateway)
 const getProductById = new GetProductById(memoryProductGateway)
 const listProducts = new ListProducts(memoryProductGateway)
 
 const server = express()
 
 server.use(express.json())
+
+server.delete('/product/:id', async (req, res) => {
+  const { id } = req.params
+  const response = await deleteProductById.deleteById({ id: parseInt(id, 10) })
+
+  if (response.statusCode === 204) {
+    return res.status(204).end()
+  }
+  res.status(response.statusCode).message({ message: response.message })
+})
 
 server.get('/product', async (req, res) => {
   const response = await listProducts.listAll()
