@@ -12,6 +12,15 @@ class MemoryProductGateway {
     })
   }
 
+  deleteById (id) {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        this._products = this._products.filter(product => product.id !== id)
+        resolve()
+      }, 2000)
+    })
+  }
+
   getById (id) {
     return new Promise(resolve => {
       setTimeout(() => {
