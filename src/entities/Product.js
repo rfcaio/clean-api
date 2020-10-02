@@ -1,5 +1,5 @@
 class Product {
-  constructor ({ name, price }) {
+  constructor ({ id = Date.now(), name, price }) {
     if (name.length < 6) {
       throw new Error('Product name must have at least 6 characters.')
     }
@@ -8,8 +8,13 @@ class Product {
       throw new Error('You must provide a valid price.')
     }
 
+    this._id = id
     this._name = name
     this._price = price
+  }
+
+  get id () {
+    return this._id
   }
 
   get name () {
