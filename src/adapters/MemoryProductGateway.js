@@ -11,6 +11,14 @@ class MemoryProductGateway {
       }, 2000)
     })
   }
+
+  listAll () {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve(this._products)
+      }, 2000)
+    })
+  }
 }
 
 module.exports = MemoryProductGateway
