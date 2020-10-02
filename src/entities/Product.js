@@ -17,7 +17,7 @@ class Product {
   }
 
   get price () {
-    return this._price.toFixed(2)
+    return this._price
   }
 }
 
