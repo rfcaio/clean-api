@@ -12,6 +12,15 @@ class MemoryProductGateway {
     })
   }
 
+  getById (id) {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        const product = this._products.find(product => product.id === id)
+        resolve(product)
+      }, 2000)
+    })
+  }
+
   listAll () {
     return new Promise(resolve => {
       setTimeout(() => {
