@@ -4,6 +4,7 @@ const CreateProduct = require('./interactors/CreateProduct')
 const DeleteProductById = require('./interactors/DeleteProductById')
 const GetProductById = require('./interactors/GetProductById')
 const ListProducts = require('./interactors/ListProducts')
+const UpdateProductById = require('./interactors/UpdateProductById')
 
 const InMemoryProductGateway = require('./adapters/InMemoryProductGateway')
 
@@ -12,6 +13,7 @@ const createProduct = new CreateProduct(productGateway)
 const deleteProductById = new DeleteProductById(productGateway)
 const getProductById = new GetProductById(productGateway)
 const listProducts = new ListProducts(productGateway)
+const updateProductById = new UpdateProductById(productGateway)
 
 const server = express()
 
@@ -52,6 +54,19 @@ server.post('/product', async (req, res) => {
   const { name, price } = req.body
   const { message, statusCode } = (
     await createProduct.create({ name, price: parseFloat(price) })
+  )
+  return res.status(statusCode).json({ message })
+})
+
+server.put('/product/:id', async (req, res) => {
+  const { name, price } = req.body
+  const { id } = req.params
+  const { message, statusCode } = (
+    await updateProductById.updateById({
+      id: parseInt(id, 10),
+      name,
+      price: parseFloat(price)
+    })
   )
   return res.status(statusCode).json({ message })
 })
