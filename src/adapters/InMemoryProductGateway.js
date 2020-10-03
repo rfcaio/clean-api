@@ -37,6 +37,20 @@ class InMemoryProductGateway {
       }, 2000)
     })
   }
+
+  updateById (product) {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        this._products = this._products.map(_product => {
+          if (_product.id === product.id) {
+            return product
+          }
+          return _product
+        })
+        resolve()
+      }, 2000)
+    })
+  }
 }
 
 module.exports = InMemoryProductGateway
