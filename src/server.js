@@ -5,13 +5,13 @@ const DeleteProductById = require('./interactors/DeleteProductById')
 const GetProductById = require('./interactors/GetProductById')
 const ListProducts = require('./interactors/ListProducts')
 
-const MemoryProductGateway = require('./adapters/MemoryProductGateway')
+const InMemoryProductGateway = require('./adapters/InMemoryProductGateway')
 
-const memoryProductGateway = new MemoryProductGateway()
-const createProduct = new CreateProduct(memoryProductGateway)
-const deleteProductById = new DeleteProductById(memoryProductGateway)
-const getProductById = new GetProductById(memoryProductGateway)
-const listProducts = new ListProducts(memoryProductGateway)
+const productGateway = new InMemoryProductGateway()
+const createProduct = new CreateProduct(productGateway)
+const deleteProductById = new DeleteProductById(productGateway)
+const getProductById = new GetProductById(productGateway)
+const listProducts = new ListProducts(productGateway)
 
 const server = express()
 

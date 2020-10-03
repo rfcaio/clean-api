@@ -1,4 +1,4 @@
-class MemoryProductGateway {
+class InMemoryProductGateway {
   constructor () {
     this._products = []
   }
@@ -39,4 +39,4 @@ class MemoryProductGateway {
   }
 }
 
-module.exports = MemoryProductGateway
+module.exports = InMemoryProductGateway
