@@ -7,8 +7,11 @@ const ListProducts = require('./interactors/ListProducts')
 const UpdateProductById = require('./interactors/UpdateProductById')
 
 const InMemoryProductGateway = require('./adapters/InMemoryProductGateway')
+const SQLiteProductGateway = require('./adapters/SQLiteProductGateway')
 
 const productGateway = new InMemoryProductGateway()
+/* eslint-disable-next-line */
+const sqliteProductGateway = new SQLiteProductGateway()
 const createProduct = new CreateProduct(productGateway)
 const deleteProductById = new DeleteProductById(productGateway)
 const getProductById = new GetProductById(productGateway)
