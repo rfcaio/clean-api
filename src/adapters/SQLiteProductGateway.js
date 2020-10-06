@@ -48,6 +48,18 @@ class SQLiteProductGateway {
       })
     })
   }
+
+  updateById (product) {
+    const UPDATE_PRODUCT_BY_ID_QUERY = 'UPDATE product SET name = ?, price = ? WHERE id = ?'
+
+    return new Promise((resolve, reject) => {
+      const { id, name, price } = product
+      // FIXME: an inexistent product should not be updated
+      this._database.run(UPDATE_PRODUCT_BY_ID_QUERY, [name, price, id], error => {
+        error ? reject(new Error('Server error occurred.')) : resolve()
+      })
+    })
+  }
 }
 
 module.exports = SQLiteProductGateway

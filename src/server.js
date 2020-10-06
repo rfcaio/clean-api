@@ -15,7 +15,7 @@ const createProduct = new CreateProduct(sqliteProductGateway)
 const deleteProductById = new DeleteProductById(productGateway)
 const getProductById = new GetProductById(sqliteProductGateway)
 const listProducts = new ListProducts(sqliteProductGateway)
-const updateProductById = new UpdateProductById(productGateway)
+const updateProductById = new UpdateProductById(sqliteProductGateway)
 
 const server = express()
 
