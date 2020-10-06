@@ -13,7 +13,7 @@ const productGateway = new InMemoryProductGateway()
 const sqliteProductGateway = new SQLiteProductGateway()
 const createProduct = new CreateProduct(sqliteProductGateway)
 const deleteProductById = new DeleteProductById(productGateway)
-const getProductById = new GetProductById(productGateway)
+const getProductById = new GetProductById(sqliteProductGateway)
 const listProducts = new ListProducts(sqliteProductGateway)
 const updateProductById = new UpdateProductById(productGateway)
 

@@ -31,6 +31,16 @@ class SQLiteProductGateway {
     })
   }
 
+  getById (id) {
+    const SELECT_PRODUCT_BY_ID_QUERY = 'SELECT * FROM product WHERE id = ?'
+
+    return new Promise((resolve, reject) => {
+      this._database.get(SELECT_PRODUCT_BY_ID_QUERY, id, (error, product) => {
+        error ? reject(new Error('Server error occurred.')) : resolve(product)
+      })
+    })
+  }
+
   listAll () {
     return new Promise((resolve, reject) => {
       this._database.all('SELECT * FROM product', (error, products) => {
