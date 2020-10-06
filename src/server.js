@@ -6,7 +6,7 @@ const GetProductById = require('./interactors/GetProductById')
 const ListProducts = require('./interactors/ListProducts')
 const UpdateProductById = require('./interactors/UpdateProductById')
 
-const SQLiteProductGateway = require('./adapters/SQLiteProductGateway')
+const SQLiteProductGateway = require('./adapters/gateways/SQLiteProductGateway')
 
 const productGateway = new SQLiteProductGateway()
 
