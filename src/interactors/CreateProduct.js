@@ -18,7 +18,7 @@ class CreateProduct {
 
       return {
         statusCode: 201,
-        message: `Product ${product.name} with price ${product.price} created with success.`
+        message: 'Product successfully created.'
       }
     } catch (err) {
       return {
