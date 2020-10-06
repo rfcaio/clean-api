@@ -19,6 +19,17 @@ class SQLiteProductGateway {
       error => error && console.log(error)
     )
   }
+
+  create (product) {
+    return new Promise((resolve, reject) => {
+      const { name, price } = product
+      const query = 'INSERT INTO product (name, price) VALUES (?, ?)'
+
+      this._database.run(query, [name, price], error => {
+        error ? reject(new Error('Server error occurred.')) : resolve()
+      })
+    })
+  }
 }
 
 module.exports = SQLiteProductGateway
