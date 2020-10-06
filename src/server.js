@@ -6,16 +6,15 @@ const GetProductById = require('./interactors/GetProductById')
 const ListProducts = require('./interactors/ListProducts')
 const UpdateProductById = require('./interactors/UpdateProductById')
 
-const InMemoryProductGateway = require('./adapters/InMemoryProductGateway')
 const SQLiteProductGateway = require('./adapters/SQLiteProductGateway')
 
-const productGateway = new InMemoryProductGateway()
-const sqliteProductGateway = new SQLiteProductGateway()
-const createProduct = new CreateProduct(sqliteProductGateway)
+const productGateway = new SQLiteProductGateway()
+
+const createProduct = new CreateProduct(productGateway)
 const deleteProductById = new DeleteProductById(productGateway)
-const getProductById = new GetProductById(sqliteProductGateway)
-const listProducts = new ListProducts(sqliteProductGateway)
-const updateProductById = new UpdateProductById(sqliteProductGateway)
+const getProductById = new GetProductById(productGateway)
+const listProducts = new ListProducts(productGateway)
+const updateProductById = new UpdateProductById(productGateway)
 
 const server = express()
 

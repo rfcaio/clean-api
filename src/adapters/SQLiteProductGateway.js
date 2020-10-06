@@ -31,6 +31,15 @@ class SQLiteProductGateway {
     })
   }
 
+  deleteById (id) {
+    return new Promise((resolve, reject) => {
+      // FIXME: an inexistent product should not be deleted
+      this._database.run('DELETE FROM product WHERE id = ?', [id], error => {
+        error ? reject(new Error('Server error occurred.')) : resolve()
+      })
+    })
+  }
+
   getById (id) {
     const SELECT_PRODUCT_BY_ID_QUERY = 'SELECT * FROM product WHERE id = ?'
 
