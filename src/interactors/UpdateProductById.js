@@ -18,7 +18,7 @@ class UpdateProductById {
 
       return {
         statusCode: 200,
-        message: `Product ${product.name} with id ${product.id} and price ${product.price} updated with success.`
+        message: 'Product succesfully updated.'
       }
     } catch (err) {
       return {
