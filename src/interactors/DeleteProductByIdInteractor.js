@@ -1,9 +1,9 @@
-class DeleteProductById {
+class DeleteProductByIdInteractor {
   constructor (productGateway) {
     this._productGateway = productGateway
   }
 
-  async deleteById (deleteProductByIdRequest) {
+  async exec (deleteProductByIdRequest) {
     const { id } = deleteProductByIdRequest
     try {
       await this._productGateway.deleteById(id)
@@ -17,4 +17,4 @@ class DeleteProductById {
   }
 }
 
-module.exports = DeleteProductById
+module.exports = DeleteProductByIdInteractor
