@@ -1,11 +1,11 @@
 const Product = require('../entities/Product')
 
-class UpdateProductById {
+class UpdateProductByIdInteractor {
   constructor (productGateway) {
     this._productGateway = productGateway
   }
 
-  async updateById (updateProductByIdRequest) {
+  async exec (updateProductByIdRequest) {
     const { id, name, price } = updateProductByIdRequest
     try {
       const product = new Product({ id, name, price })
@@ -29,4 +29,4 @@ class UpdateProductById {
   }
 }
 
-module.exports = UpdateProductById
+module.exports = UpdateProductByIdInteractor

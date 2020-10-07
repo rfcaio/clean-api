@@ -4,11 +4,12 @@ const CreateProductInteractor = require('./interactors/CreateProductInteractor')
 const DeleteProductById = require('./interactors/DeleteProductById')
 const GetProductByIdInteractor = require('./interactors/GetProductByIdInteractor')
 const ListProductsInteractor = require('./interactors/ListProductsInteractor')
-const UpdateProductById = require('./interactors/UpdateProductById')
+const UpdateProductByIdInteractor = require('./interactors/UpdateProductByIdInteractor')
 
 const CreateProductExpressController = require('./adapters/controllers/CreateProductExpressController')
 const GetProductByIdExpressController = require('./adapters/controllers/GetProductByIdExpressController')
 const ListProductsExpressController = require('./adapters/controllers/ListProductsExpressController')
+const UpdateProductByIdExpressController = require('./adapters/controllers/UpdateProductByIdExpressController')
 
 const SQLiteProductGateway = require('./adapters/gateways/SQLiteProductGateway')
 
@@ -18,11 +19,12 @@ const createProductInteractor = new CreateProductInteractor(productGateway)
 const deleteProductById = new DeleteProductById(productGateway)
 const getProductByIdInteractor = new GetProductByIdInteractor(productGateway)
 const listProductsInteractor = new ListProductsInteractor(productGateway)
-const updateProductById = new UpdateProductById(productGateway)
+const updateProductByIdInteractor = new UpdateProductByIdInteractor(productGateway)
 
 const createProductExpressController = new CreateProductExpressController(createProductInteractor)
 const getProductByIdExpressController = new GetProductByIdExpressController(getProductByIdInteractor)
 const listProductsExpressController = new ListProductsExpressController(listProductsInteractor)
+const updateProductByIdExpressController = new UpdateProductByIdExpressController(updateProductByIdInteractor)
 
 const server = express()
 
@@ -44,17 +46,6 @@ server.get('/product/:id', getProductByIdExpressController.route())
 
 server.post('/product', createProductExpressController.route())
 
-server.put('/product/:id', async (req, res) => {
-  const { name, price } = req.body
-  const { id } = req.params
-  const { message, statusCode } = (
-    await updateProductById.updateById({
-      id: parseInt(id, 10),
-      name,
-      price: parseFloat(price)
-    })
-  )
-  return res.status(statusCode).json({ message })
-})
+server.put('/product/:id', updateProductByIdExpressController.route())
 
 server.listen(3001)
