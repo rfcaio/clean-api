@@ -1,20 +1,24 @@
 const express = require('express')
 
-const CreateProduct = require('./interactors/CreateProduct')
+const CreateProductInteractor = require('./interactors/CreateProductInteractor')
 const DeleteProductById = require('./interactors/DeleteProductById')
 const GetProductById = require('./interactors/GetProductById')
 const ListProducts = require('./interactors/ListProducts')
 const UpdateProductById = require('./interactors/UpdateProductById')
 
+const CreateProductExpressController = require('./adapters/controllers/CreateProductExpressController')
+
 const SQLiteProductGateway = require('./adapters/gateways/SQLiteProductGateway')
 
 const productGateway = new SQLiteProductGateway()
 
-const createProduct = new CreateProduct(productGateway)
+const createProductInteractor = new CreateProductInteractor(productGateway)
 const deleteProductById = new DeleteProductById(productGateway)
 const getProductById = new GetProductById(productGateway)
 const listProducts = new ListProducts(productGateway)
 const updateProductById = new UpdateProductById(productGateway)
+
+const createProductExpressController = new CreateProductExpressController(createProductInteractor)
 
 const server = express()
 
@@ -51,13 +55,7 @@ server.get('/product/:id', async (req, res) => {
   return res.status(response.statusCode).json({ message: response.message })
 })
 
-server.post('/product', async (req, res) => {
-  const { name, price } = req.body
-  const { message, statusCode } = (
-    await createProduct.create({ name, price: parseFloat(price) })
-  )
-  return res.status(statusCode).json({ message })
-})
+server.post('/product', createProductExpressController.route())
 
 server.put('/product/:id', async (req, res) => {
   const { name, price } = req.body

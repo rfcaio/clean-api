@@ -1,11 +1,11 @@
 const Product = require('../entities/Product')
 
-class CreateProduct {
+class CreateProductInteractor {
   constructor (productGateway) {
     this._productGateway = productGateway
   }
 
-  async create (createProductRequest) {
+  async exec (createProductRequest) {
     const { name, price } = createProductRequest
     try {
       const product = new Product({ name, price })
@@ -29,4 +29,4 @@ class CreateProduct {
   }
 }
 
-module.exports = CreateProduct
+module.exports = CreateProductInteractor
