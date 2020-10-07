@@ -1,9 +1,9 @@
-class ListProducts {
+class ListProductsInteractor {
   constructor (productGateway) {
     this._productGateway = productGateway
   }
 
-  async listAll () {
+  async exec () {
     try {
       const products = await this._productGateway.listAll()
       return {
@@ -19,4 +19,4 @@ class ListProducts {
   }
 }
 
-module.exports = ListProducts
+module.exports = ListProductsInteractor
