@@ -2,11 +2,12 @@ const express = require('express')
 
 const CreateProductInteractor = require('./interactors/CreateProductInteractor')
 const DeleteProductById = require('./interactors/DeleteProductById')
-const GetProductById = require('./interactors/GetProductById')
+const GetProductByIdInteractor = require('./interactors/GetProductByIdInteractor')
 const ListProductsInteractor = require('./interactors/ListProductsInteractor')
 const UpdateProductById = require('./interactors/UpdateProductById')
 
 const CreateProductExpressController = require('./adapters/controllers/CreateProductExpressController')
+const GetProductByIdExpressController = require('./adapters/controllers/GetProductByIdExpressController')
 const ListProductsExpressController = require('./adapters/controllers/ListProductsExpressController')
 
 const SQLiteProductGateway = require('./adapters/gateways/SQLiteProductGateway')
@@ -15,11 +16,12 @@ const productGateway = new SQLiteProductGateway()
 
 const createProductInteractor = new CreateProductInteractor(productGateway)
 const deleteProductById = new DeleteProductById(productGateway)
-const getProductById = new GetProductById(productGateway)
+const getProductByIdInteractor = new GetProductByIdInteractor(productGateway)
 const listProductsInteractor = new ListProductsInteractor(productGateway)
 const updateProductById = new UpdateProductById(productGateway)
 
 const createProductExpressController = new CreateProductExpressController(createProductInteractor)
+const getProductByIdExpressController = new GetProductByIdExpressController(getProductByIdInteractor)
 const listProductsExpressController = new ListProductsExpressController(listProductsInteractor)
 
 const server = express()
@@ -38,16 +40,7 @@ server.delete('/product/:id', async (req, res) => {
 
 server.get('/product', listProductsExpressController.route())
 
-server.get('/product/:id', async (req, res) => {
-  const { id } = req.params
-  const response = await getProductById.getById({ id: parseInt(id, 10) })
-
-  if (response.statusCode === 200) {
-    const { product, statusCode } = response
-    return res.status(statusCode).json(product)
-  }
-  return res.status(response.statusCode).json({ message: response.message })
-})
+server.get('/product/:id', getProductByIdExpressController.route())
 
 server.post('/product', createProductExpressController.route())
 

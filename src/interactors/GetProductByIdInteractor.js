@@ -1,9 +1,9 @@
-class GetProductById {
+class GetProductByIdInteractor {
   constructor (productGateway) {
     this._productGateway = productGateway
   }
 
-  async getById (getProductByIdRequest) {
+  async exec (getProductByIdRequest) {
     const { id } = getProductByIdRequest
     try {
       const product = await this._productGateway.getById(id)
@@ -27,4 +27,4 @@ class GetProductById {
   }
 }
 
-module.exports = GetProductById
+module.exports = GetProductByIdInteractor
