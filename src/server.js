@@ -10,13 +10,14 @@ const CreateProductController = require('./adapters/controllers/CreateProductCon
 const DeleteProductByIdExpressController = require('./adapters/controllers/DeleteProductByIdExpressController')
 const GetProductByIdController = require('./adapters/controllers/GetProductByIdController')
 const ListProductsController = require('./adapters/controllers/ListProductsController')
-const UpdateProductByIdExpressController = require('./adapters/controllers/UpdateProductByIdExpressController')
+const UpdateProductByIdController = require('./adapters/controllers/UpdateProductByIdController')
 
 const SQLiteProductGateway = require('./adapters/gateways/SQLiteProductGateway')
 
 const CreateProductExpressRouter = require('./adapters/routers/express/CreateProductExpressRouter')
 const GetProductByIdExpressRouter = require('./adapters/routers/express/GetProductByIdExpressRouter')
 const ListProductsExpressRouter = require('./adapters/routers/express/ListProductsExpressRouter')
+const UpdateProductByIdExpressRouter = require('./adapters/routers/express/UpdateProductByIdExpressRouter')
 
 const productGateway = new SQLiteProductGateway()
 
@@ -30,7 +31,7 @@ const createProductController = new CreateProductController(createProductInterac
 const deleteProductByIdExpressController = new DeleteProductByIdExpressController(deleteProductByIdInteractor)
 const getProductByIdController = new GetProductByIdController(getProductByIdInteractor)
 const listProductsController = new ListProductsController(listProductsInteractor)
-const updateProductByIdExpressController = new UpdateProductByIdExpressController(updateProductByIdInteractor)
+const updateProductByIdController = new UpdateProductByIdController(updateProductByIdInteractor)
 
 const server = express()
 
@@ -44,6 +45,6 @@ server.get('/product/:id', GetProductByIdExpressRouter.route(getProductByIdContr
 
 server.post('/product', CreateProductExpressRouter.route(createProductController))
 
-server.put('/product/:id', updateProductByIdExpressController.route())
+server.put('/product/:id', UpdateProductByIdExpressRouter.route(updateProductByIdController))
 
 server.listen(3001)
