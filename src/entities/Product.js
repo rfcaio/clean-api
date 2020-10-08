@@ -5,7 +5,7 @@ class Product {
     }
 
     if (price <= 0) {
-      throw new Error('You must provide a valid price.')
+      throw new Error('You must provide a positive price.')
     }
 
     this._id = id
