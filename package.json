@@ -40,6 +40,6 @@
     "url": "https://github.com/rfcaio/clean-api.git"
   },
   "scripts": {
-    "start": "nodemon src/server.js"
+    "start": "nodemon src/main/express.js"
   }
 }
