@@ -9,12 +9,13 @@ const UpdateProductByIdInteractor = require('./interactors/UpdateProductByIdInte
 const CreateProductController = require('./adapters/controllers/CreateProductController')
 const DeleteProductByIdExpressController = require('./adapters/controllers/DeleteProductByIdExpressController')
 const GetProductByIdExpressController = require('./adapters/controllers/GetProductByIdExpressController')
-const ListProductsExpressController = require('./adapters/controllers/ListProductsExpressController')
+const ListProductsController = require('./adapters/controllers/ListProductsController')
 const UpdateProductByIdExpressController = require('./adapters/controllers/UpdateProductByIdExpressController')
 
 const SQLiteProductGateway = require('./adapters/gateways/SQLiteProductGateway')
 
 const CreateProductExpressRouter = require('./adapters/routers/express/CreateProductExpressRouter')
+const ListProductsExpressRouter = require('./adapters/routers/express/ListProductsExpressRouter')
 
 const productGateway = new SQLiteProductGateway()
 
@@ -27,7 +28,7 @@ const updateProductByIdInteractor = new UpdateProductByIdInteractor(productGatew
 const createProductController = new CreateProductController(createProductInteractor)
 const deleteProductByIdExpressController = new DeleteProductByIdExpressController(deleteProductByIdInteractor)
 const getProductByIdExpressController = new GetProductByIdExpressController(getProductByIdInteractor)
-const listProductsExpressController = new ListProductsExpressController(listProductsInteractor)
+const listProductsController = new ListProductsController(listProductsInteractor)
 const updateProductByIdExpressController = new UpdateProductByIdExpressController(updateProductByIdInteractor)
 
 const server = express()
@@ -36,7 +37,7 @@ server.use(express.json())
 
 server.delete('/product/:id', deleteProductByIdExpressController.route())
 
-server.get('/product', listProductsExpressController.route())
+server.get('/product', ListProductsExpressRouter.route(listProductsController))
 
 server.get('/product/:id', getProductByIdExpressController.route())
 
