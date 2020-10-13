@@ -3,8 +3,7 @@ class GetProductByIdInteractor {
     this._productGateway = productGateway
   }
 
-  async exec (getProductByIdRequest) {
-    const { id } = getProductByIdRequest
+  async exec (id) {
     try {
       const product = await this._productGateway.getById(id)
       if (product) {
