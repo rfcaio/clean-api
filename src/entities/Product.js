@@ -1,11 +1,11 @@
 class Product {
   constructor ({ id, name, price }) {
     if (name.length < 6) {
-      throw new Error('Product name must have at least 6 characters.')
+      throw new Error('Product name must have at least six characters.')
     }
 
     if (price <= 0) {
-      throw new Error('You must provide a positive price.')
+      throw new Error('Product price must be a number greater than zero.')
     }
 
     this._id = id
