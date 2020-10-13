@@ -3,8 +3,7 @@ class DeleteProductByIdInteractor {
     this._productGateway = productGateway
   }
 
-  async exec (deleteProductByIdRequest) {
-    const { id } = deleteProductByIdRequest
+  async exec (id) {
     try {
       await this._productGateway.deleteById(id)
       return { statusCode: 204 }

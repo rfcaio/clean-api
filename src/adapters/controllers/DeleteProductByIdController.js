@@ -1,16 +1,15 @@
+const UUID = require('../helpers/UUID')
+
 class DeleteProductByIdController {
   constructor (deleteProductByIdInteractor) {
     this._deleteProductByIdInteractor = deleteProductByIdInteractor
   }
 
-  async deleteById (productId) {
-    const id = parseInt(productId, 10)
-
-    if (!Number.isInteger(id)) {
-      throw new Error('You must provide a valid integer as id.')
+  async deleteById (id) {
+    if (UUID.isNotValid(id)) {
+      throw new Error('Product ID must be a valid UUID.')
     }
-
-    return await this._deleteProductByIdInteractor.exec({ id })
+    return await this._deleteProductByIdInteractor.exec(id)
   }
 }
 
