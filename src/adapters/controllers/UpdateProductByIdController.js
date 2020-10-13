@@ -1,13 +1,13 @@
+const UUID = require('../helpers/UUID')
+
 class UpdateProductByIdController {
   constructor (updateProductByIdInteractor) {
     this._updateProductByIdInteractor = updateProductByIdInteractor
   }
 
-  async updateById ({ id: productId, name, price }) {
-    const id = parseInt(productId, 10)
-
-    if (!Number.isInteger(id)) {
-      throw new Error('You must provide a valid integer as id.')
+  async updateById ({ id, name, price }) {
+    if (UUID.isNotValid(id)) {
+      throw new Error('Product ID must be a valid UUID.')
     }
 
     if (!name || typeof name !== 'string') {
