@@ -11,11 +11,11 @@ class UpdateProductByIdController {
     }
 
     if (!name || typeof name !== 'string') {
-      throw new Error('You must provide a text name.')
+      throw new Error('Product name should not be empty.')
     }
 
     if (!price || isNaN(price)) {
-      throw new Error('You must provide a valid number as a price.')
+      throw new Error('Product price should be a number.')
     }
 
     return (
