@@ -1,3 +1,5 @@
+const UUID = require('../helpers/UUID')
+
 class CreateProductController {
   constructor (createProductInteractor) {
     this._createProductInteractor = createProductInteractor
@@ -12,8 +14,10 @@ class CreateProductController {
       throw new Error('You must provide a valid number as a price.')
     }
 
+    const id = UUID.generate()
+
     return (
-      await this._createProductInteractor.exec({ name, price: parseFloat(price) })
+      await this._createProductInteractor.exec({ id, name, price: parseFloat(price) })
     )
   }
 }

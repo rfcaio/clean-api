@@ -21,11 +21,11 @@ class SQLiteProductGateway {
   }
 
   create (product) {
-    const SELECT_ALL_PRODUCTS_QUERY = 'INSERT INTO product (name, price) VALUES (?, ?)'
+    const INSERT_PRODUCT_QUERY = 'INSERT INTO product (id, name, price) VALUES (?, ?, ?)'
 
     return new Promise((resolve, reject) => {
-      const { name, price } = product
-      this._database.run(SELECT_ALL_PRODUCTS_QUERY, [name, price], error => {
+      const { id, name, price } = product
+      this._database.run(INSERT_PRODUCT_QUERY, [id, name, price], error => {
         error ? reject(new Error('Server error occurred.')) : resolve()
       })
     })

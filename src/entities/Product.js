@@ -1,5 +1,5 @@
 class Product {
-  constructor ({ id = Date.now(), name, price }) {
+  constructor ({ id, name, price }) {
     if (name.length < 6) {
       throw new Error('Product name must have at least 6 characters.')
     }

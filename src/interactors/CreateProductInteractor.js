@@ -6,9 +6,9 @@ class CreateProductInteractor {
   }
 
   async exec (createProductRequest) {
-    const { name, price } = createProductRequest
+    const { id, name, price } = createProductRequest
     try {
-      const product = new Product({ name, price })
+      const product = new Product({ id, name, price })
 
       await this._productGateway.create({
         id: product.id,
