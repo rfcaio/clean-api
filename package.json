@@ -20,8 +20,10 @@
     "eslint-plugin-promise": "4.2.1",
     "eslint-plugin-standard": "4.0.1",
     "husky": "4.3.0",
+    "jest": "26.5.3",
     "lint-staged": "10.4.0",
-    "nodemon": "2.0.4"
+    "nodemon": "2.0.4",
+    "supertest": "5.0.0"
   },
   "homepage": "https://github.com/rfcaio/clean-api#readme",
   "husky": {
@@ -41,6 +43,8 @@
     "url": "https://github.com/rfcaio/clean-api.git"
   },
   "scripts": {
-    "start": "nodemon src/main/express.js"
+    "start": "nodemon src/main/express.js",
+    "test": "jest --watch",
+    "test:coverage": "jest --coverage"
   }
 }
