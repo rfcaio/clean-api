@@ -31,6 +31,14 @@ class SQLiteProductGateway {
     })
   }
 
+  deleteAll () {
+    return new Promise((resolve, reject) => {
+      this._database.run('DELETE FROM product', error => {
+        error ? reject(new Error('Server error occurred.')) : resolve()
+      })
+    })
+  }
+
   deleteById (id) {
     return new Promise((resolve, reject) => {
       // FIXME: an inexistent product should not be deleted
