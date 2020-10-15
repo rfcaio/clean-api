@@ -10,7 +10,7 @@ class CreateProductController {
       throw new Error('Product name should not be empty.')
     }
 
-    if (!price || isNaN(price)) {
+    if (price == null || isNaN(price)) {
       throw new Error('Product price should be a number.')
     }
 

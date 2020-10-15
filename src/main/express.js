@@ -20,7 +20,11 @@ const GetProductByIdExpressRouter = require('../adapters/routers/express/GetProd
 const ListProductsExpressRouter = require('../adapters/routers/express/ListProductsExpressRouter')
 const UpdateProductByIdExpressRouter = require('../adapters/routers/express/UpdateProductByIdExpressRouter')
 
-const productGateway = new SQLiteProductGateway()
+const productGateway = (
+  process.env.ENV_TYPE === 'test'
+    ? new SQLiteProductGateway('product.test.db')
+    : new SQLiteProductGateway()
+)
 
 const createProductInteractor = new CreateProductInteractor(productGateway)
 const deleteProductByIdInteractor = new DeleteProductByIdInteractor(productGateway)
@@ -48,4 +52,6 @@ server.post('/product', CreateProductExpressRouter.route(createProductController
 
 server.put('/product/:id', UpdateProductByIdExpressRouter.route(updateProductByIdController))
 
-server.listen(3001)
+process.env.ENV_TYPE !== 'test' && server.listen(3001)
+
+module.exports = { productGateway, server }

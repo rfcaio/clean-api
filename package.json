@@ -44,7 +44,7 @@
   },
   "scripts": {
     "start": "nodemon src/main/express.js",
-    "test": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "test:unit": "jest --watch ./src",
+    "test:e2e": "ENV_TYPE=test jest ./test"
   }
 }
