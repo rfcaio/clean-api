@@ -1,8 +1,8 @@
 const sqlite3 = require('sqlite3').verbose()
 
 class SQLiteProductGateway {
-  constructor () {
-    this._database = new sqlite3.Database('product.db', error => {
+  constructor (databaseFileName = 'product.db') {
+    this._database = new sqlite3.Database(databaseFileName, error => {
       if (error) {
         throw new Error(error.message)
       }
