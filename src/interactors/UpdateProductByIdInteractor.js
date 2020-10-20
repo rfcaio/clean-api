@@ -18,7 +18,7 @@ class UpdateProductByIdInteractor {
 
       return {
         statusCode: 200,
-        message: 'Product succesfully updated.'
+        message: 'Product successfully updated.'
       }
     } catch (err) {
       return {
