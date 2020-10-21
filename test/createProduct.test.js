@@ -21,7 +21,8 @@ describe('product test suites', () => {
         await request(server).post('/product').send({ name: 'Arroz', price: 6.49 })
       )
       expect(response.status).toEqual(400)
-      expect(response.body.message).toEqual('Product name must have at least six characters.')
+      expect(response.body.message)
+        .toEqual('Product name must have at least six characters.')
     })
 
     test('reject product with no price', async () => {
@@ -33,16 +34,21 @@ describe('product test suites', () => {
     })
 
     test('reject product with price less than or equals zero', async () => {
-      const response = (
-        await request(server).post('/product').send({ name: 'Arroz Alteza 1Kg', price: 0 })
+      const response = await (
+        request(server)
+          .post('/product')
+          .send({ name: 'Arroz Alteza 1Kg', price: 0 })
       )
       expect(response.status).toEqual(400)
-      expect(response.body.message).toEqual('Product price must be a number greater than zero.')
+      expect(response.body.message)
+        .toEqual('Product price must be a number greater than zero.')
     })
 
     test('create product successfully', async () => {
-      const response = (
-        await request(server).post('/product').send({ name: 'Arroz Alteza 1Kg', price: 6.49 })
+      const response = await (
+        request(server)
+          .post('/product')
+          .send({ name: 'Arroz Alteza 1Kg', price: 6.49 })
       )
       expect(response.status).toEqual(201)
       expect(response.body.message).toEqual('Product successfully created.')
