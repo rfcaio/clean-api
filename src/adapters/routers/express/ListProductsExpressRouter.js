@@ -9,7 +9,7 @@ class ListProductsExpressRouter {
         const { statusCode } = listProductsResponse
         if (statusCode === 200) {
           const { products } = listProductsResponse
-          return res.status(statusCode).json(products)
+          return res.status(statusCode).json({ products })
         } else {
           const { message } = listProductsResponse
           return res.status(statusCode).json({ message })
