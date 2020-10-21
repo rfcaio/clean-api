@@ -17,7 +17,7 @@ describe('GetProductByIdController', () => {
       expect.assertions(2)
       expect(getProductByIdInteractor.exec).not.toHaveBeenCalled()
       await (
-        expect(getProductByIdController.getById({ id: '1' }))
+        expect(getProductByIdController.getById('1'))
           .rejects
           .toEqual(new Error('Product ID must be a valid UUID.'))
       )
